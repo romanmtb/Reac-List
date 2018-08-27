@@ -1,20 +1,36 @@
 import React, {Component} from 'react'
-import ArticleList from './NewsList'
-import articles from '../data'
 
+class App extends Component {
+    constructor(props) {
+        super(props)
 
-class App extends  Component {
+        this.state = { news: [] }
+    }
+
+    componentDidMount() {
+        this.apiGetNews()
+    }
+
+    apiGetNews = () => {
+        fetch('https://ghibliapi.herokuapp.com/films')
+            .then(res => res.json())
+            .then(data => this.setState({news: data }))
+    }
+
 
     render() {
+
         return (
-            <div>
-                <div>
-                    <h1>
-                        App name
-                    </h1>
-                </div>
-                <ArticleList articles = {articles}/>
-            </div>
+            this.state.news.map(item => {
+                return (
+                    <div key = {item.id} className="artticle">
+                        <div className="article__item">
+                            <h3>{item.title}</h3>
+                            <p>{item.description}</p>
+                        </div>
+                    </div>
+                )
+            })
         )
     }
 
