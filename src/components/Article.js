@@ -9,51 +9,27 @@ class Article extends Component {
         }
     }
 
-    componentWillMount() {
-        console.log( '---', 'mounting' )
+    componentDidMount() {
+        console.log( '---' )
     }
-
-    componentWillReceiveMount(nextProps) {
-        if (nextProps.defaultOpen !== this.props.defaultOpen) this.setState({
-            isOpen: nextProps.defaultOpen
-        })
-    }
-
-    componentWillUpdate() {
-        console.log( '---', 'will update' )
-    }
-
-
 
     render() {
         const {article} = this.props
-        const style = {width: '50%'}
-        const body = this.state.isOpen && <section className="card-text">{article.text}</section>
+        const body = <section>{article.description}</section>
         return (
-            <div className="card mx-auto" style = {style}>
-                <div className="card-header">
-                    <h2>{article.title}
-                        <button onClick={this.handleClick} className="btn btn-primary btn-lg float-right">
-                            {this.state.isOpen ? 'Close' : 'Open'}
-                        </button>
+            <div>
+                <div>
+                    <h2>
+                        {article.title}
                     </h2>
                 </div>
-                <div className="card-body">
-                    <h6 className="card-subtitle text-muted">
-                        Creation date: {(new Date(article.date)).toDateString()}
-                    </h6>
+                <div>
                     {body}
                 </div>
             </div>
         )
     }
 
-    handleClick = () => {
-        console.log('---', 'clicked')
-        this.setState({
-            isOpen: !this.state.isOpen
-        })
-    }
 }
 
 export default Article
