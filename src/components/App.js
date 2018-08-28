@@ -12,20 +12,22 @@ class App extends Component {
     }
 
     apiGetNews = () => {
+        this.setState({loading: true})
         fetch('https://content.guardianapis.com/search?order-by=newest&page=1&page-size=10&api-key=9f756fb3-eb7e-4c78-b09e-fe352ae2620d')
             .then(res => res.json())
-            .then(data => console.log(data.response.results))
+            .then(data => this.setState({news: data.response.results, loading: false}))
+            .catch(e => this.setState({loading: 'ERROR'}))
     }
 
 
     render() {
 
         return (
-            this.state.news.map(item => {
-                return (
-                    <div>hello</div>
-                )
-            })
+            <ul>
+                {this.state.news.length >= 1 && this.state.news.map(function(name, index) {
+                    return <li key = {index}>{name.webTitle}</li>
+                })}
+            </ul>
         )
     }
 
