@@ -53,6 +53,12 @@ class App extends Component {
     }
 
     render() {
+        if (this.state.loading === 'ERROR') return (
+            <div>
+                <GuardianHeader/>
+                <p>Sorry we couldn't find news for you. Please try again later</p>
+            </div>
+        );
 
         return (
             <div>
