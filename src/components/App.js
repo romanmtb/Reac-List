@@ -1,64 +1,86 @@
 import React, {Component} from 'react'
+import api from '../utils'
+import ListComponent from "./ListComponent";
+import GuardianHeader from './HeaderComponent'
+import NavigationComponent from "./NavigationComponent";
+import HeaderMenuComponent from "./HeaderMenuComponent";
+import PropTypes from 'prop-types'
+
 
 class App extends Component {
     constructor(props) {
         super(props)
 
-        this.state = { news: [] }
+        this.state = {news: []}
+    }
+
+    static defaultProps = {
+        loading: false,
+        page: 0,
+        totalPages: 0,
+        news: [],
     }
 
     componentDidMount() {
-        this.apiGetNews(1, 10)
+        this.apiGetNews()
     }
 
-    apiGetNews = (pageNumber, pageSize) => {
-        console.log('---', 'get news')
+    apiGetNews = (pageNumber = 1, pageSize = 10) => {
         this.setState({loading: true, page: pageNumber})
-        fetch(`https://content.guardianapis.com/search?order-by=newest&page=${pageNumber}&page-size=${pageSize}&api-key=9f756fb3-eb7e-4c78-b09e-fe352ae2620d`)
-            .then(res => res.json())
-            .then(data => this.setState({news: data.response.results, loading: false, totalPages: data.response.pages}))
+        api(pageNumber, pageSize)
+            .then(res => {
+                let data = res.response;
+                this.setState({news: data.results, loading: false, totalPages: data.pages})
+            })
             .catch(e => this.setState({loading: 'ERROR'}))
+    }
+
+    refreshNews = () => this.apiGetNews(1, 10)
+
+
+    prevPage = () => {
+        let page = this.state.page;
+        page--;
+        this.setState({page: page});
+        this.apiGetNews(page);
+    }
+
+    nextPage = () => {
+        let page = this.state.page;
+        page++;
+        this.setState({page: page});
+        this.apiGetNews(page);
     }
 
     render() {
 
         return (
             <div>
-                {<h1>The Guardians News</h1>}
-                <button onClick={this.refresh}>Refresh</button>
-                <ul>
-                    {this.state.news.length >= 1 && this.state.news.map(function(name, index) {
-                        return <li key = {index}>{name.webTitle}</li>
-                    })}
-                </ul>
-                <div>
-                    <button onClick={this.prevPage}>Prev</button>
-                        <span>{this.state.page} of {this.state.totalPages}</span>
-                    <button onClick={this.nextPage}>Next</button>
-                </div>
+                <GuardianHeader/>
+
+                <HeaderMenuComponent refreshNews={this.refreshNews} />
+
+                <ListComponent data={this.state.news}/>
+
+                <NavigationComponent
+                    currentPage={this.state.page}
+                    totalPage={this.state.totalPages}
+                    goForward={this.nextPage}
+                    goBack={this.prevPage}
+                />
             </div>
         )
     }
 
-    refresh = () => {
-        this.apiGetNews(1, 10)
-        console.log('---', 'refresh')
-    }
+}
 
-    prevPage = () => {
-        let a = this.state.page - 1; // тут надо как то сделать проверку на то если a == 1 то не посылать запрос
-        this.setState({page: a});
-        this.apiGetNews(a, 10);
-        console.log('---', 'Prev Page')
-    }
-
-    nextPage = () => {
-        let a = this.state.page + 1;
-        this.setState({page: a});
-        this.apiGetNews(a, 10);
-        console.log('---', 'Next Page')
-    }
+App.propTypes = {
+    loading: PropTypes.any,
+    page: PropTypes.number,
+    totalPages: PropTypes.number,
+    news: PropTypes.array,
 
 }
 
 export default App
+
