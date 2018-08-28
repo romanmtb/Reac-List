@@ -1,6 +1,6 @@
 import React from "react";
 
-const NavigationCompoennt = ({currentPage, totalPage, goForward, goBack}) => {
+const NavigationComponent = ({currentPage, totalPage, goForward, goBack}) => {
     return (
         <div>
             <button onClick={goBack}>Prev</button>
@@ -8,9 +8,9 @@ const NavigationCompoennt = ({currentPage, totalPage, goForward, goBack}) => {
             <button onClick={goForward}>Next</button>
         </div>
     )
-}
+};
 
-export default NavigationCompoennt
+export default NavigationComponent
 
 
 
