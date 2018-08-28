@@ -1,5 +1,5 @@
 import React from "react";
 
-const HeaderMenuComponent = ({refreshNews}) => <button onClick={refreshNews}>Refresh</button>
+const HeaderMenuComponent = (props) => (<button onClick={props.refreshNews}>Refresh</button>);
 
 export default HeaderMenuComponent

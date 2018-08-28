@@ -1,11 +1,24 @@
 import React from "react";
+import ListElementComponent from "./ListElementComponent";
 
-const ListComponent = ({data}) => {
+const ListComponent = ({data, openHandler}) => {
     return <ul>
-        {data.length >= 1 && data.map(function (item) {
-            return <li key={item.id}>{item.webTitle}</li>
-        })}
+        {
+            //в данном случае handler - это как раз та функция когда будет обрабатываеть раскрытие новости
+            data.length >= 1 &&
+            data.map((item, idx) => {
+                    return (
+                        <ListElementComponent
+                            key={idx}
+                            idx={idx}
+                            title={item.webTitle}
+                            handler={openHandler}
+                            open={item.opened}
+                        />)
+                }
+            )
+        }
     </ul>
-    }
+};
 
 export default ListComponent
