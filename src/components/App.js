@@ -6,6 +6,7 @@ import NavigationComponent from "./NavigationComponent";
 import HeaderMenuComponent from "./HeaderMenuComponent";
 import PropTypes from 'prop-types'
 import LoadingComponent from "./LoadingComponent";
+import 'bootstrap/dist/css/bootstrap.css'
 
 
 class App extends Component {
@@ -62,26 +63,33 @@ class App extends Component {
     render() {
 
         if (this.state.loading === 'ERROR') return (
-            <div>
-                <GuardianHeader/>
-                <p>Sorry we couldn't find news for you. Please try again later</p>
+            <div className="container">
+                <header className="jumbotron">
+                    <GuardianHeader/>
+                    <HeaderMenuComponent refreshNews={this.refreshNews}/>
+                </header>
+                <div className="alert-danger"><p>Sorry we couldn't find news for you. Please try again later</p></div>
             </div>
         );
 
         return (
-            <div>
-                <GuardianHeader/>
+            <div className="container">
+                <header className="jumbotron">
+                    <GuardianHeader/>
+                    <HeaderMenuComponent refreshNews={this.refreshNews}/>
+                </header>
 
-                <HeaderMenuComponent refreshNews={this.refreshNews}/>
+                <div className="container" style = {{ width: '90%'}}>
+                    <ListComponent data={this.state.news} openHandler={this.changeState}/>
 
-                <ListComponent data={this.state.news} openHandler={this.changeState}/>
-                {!this.state.loading ? <NavigationComponent
-                    currentPage={this.state.page}
-                    totalPage={this.state.totalPages}
-                    goForward={this.nextPage}
-                    goBack={this.prevPage}
-                /> : <LoadingComponent/>
-                }
+                    {!this.state.loading ? <NavigationComponent
+                        currentPage={this.state.page}
+                        totalPage={this.state.totalPages}
+                        goForward={this.nextPage}
+                        goBack={this.prevPage}
+                    /> : <LoadingComponent/>
+                    }
+                </div>
             </div>
         )
     }
