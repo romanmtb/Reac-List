@@ -23,11 +23,14 @@ class App extends Component {
     render() {
 
         return (
-            <ul>
-                {this.state.news.length >= 1 && this.state.news.map(function(name, index) {
-                    return <li key = {index}>{name.webTitle}</li>
-                })}
-            </ul>
+            <div>
+                {<h1>The Guardians News</h1>}
+                <ul>
+                    {this.state.news.length >= 1 && this.state.news.map(function(name, index) {
+                        return <li key = {index}>{name.webTitle}</li>
+                    })}
+                </ul>
+            </div>
         )
     }
 
