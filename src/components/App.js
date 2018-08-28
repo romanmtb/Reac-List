@@ -36,7 +36,7 @@ class App extends Component {
             .catch(e => this.setState({loading: 'ERROR'}))
     };
 
-    refreshNews = () => this.apiGetNews(this.state.page);
+    refreshNews = () => this.apiGetNews(1, 10);
 
 
     prevPage = () => {
@@ -55,15 +55,21 @@ class App extends Component {
 
     changeState(e, idx) {
         let current = this.state.news;
-        //в этом методе надо добавить запрос на загрузку новости и этот текст нужно засунуть в объект новости
         current[idx].opened = !current[idx].opened;
         this.setState(current);
     }
 
     render() {
 
+        if (this.state.loading === 'ERROR') return (
+            <div>
+                <GuardianHeader/>
+                <p>Sorry we couldn't find news for you. Please try again later</p>
+            </div>
+        );
+
         return (
-            <React.Fragment>
+            <div>
                 <GuardianHeader/>
 
                 <HeaderMenuComponent refreshNews={this.refreshNews}/>
@@ -76,7 +82,7 @@ class App extends Component {
                     goBack={this.prevPage}
                 /> : <LoadingComponent/>
                 }
-            </React.Fragment>
+            </div>
         )
     }
 
