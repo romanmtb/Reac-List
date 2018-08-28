@@ -12,9 +12,9 @@ class App extends Component {
     }
 
     apiGetNews = () => {
-        fetch('https://ghibliapi.herokuapp.com/films')
+        fetch('https://content.guardianapis.com/search?order-by=newest&page=1&page-size=10&api-key=9f756fb3-eb7e-4c78-b09e-fe352ae2620d')
             .then(res => res.json())
-            .then(data => this.setState({news: data }))
+            .then(data => console.log(data.response.results))
     }
 
 
@@ -23,12 +23,7 @@ class App extends Component {
         return (
             this.state.news.map(item => {
                 return (
-                    <div key = {item.id} className="artticle">
-                        <div className="article__item">
-                            <h3>{item.title}</h3>
-                            <p>{item.description}</p>
-                        </div>
-                    </div>
+                    <div>hello</div>
                 )
             })
         )
