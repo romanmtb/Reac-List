@@ -89,7 +89,7 @@ class App extends Component {
 
 			this.setState({ page: inp });
 
-			setTimeout(() => this.setPage(inp), 1600);
+			// setTimeout(() => this.setPage(inp), 1600);
 			// this.setPage(inp)
 		}
 	}
@@ -135,6 +135,7 @@ class App extends Component {
 							goForward={this.nextPage}
 							goBack={this.prevPage}
 							inputChangeHandler={this.inputChangeHandler}
+							setPage={this.setPage}
 						/>
 					}
 				</div>

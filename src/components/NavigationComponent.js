@@ -25,6 +25,8 @@ const NavigationComponent = ({
 
 		/>
 
+		<button onClick={()=>setPage(currentPage)}>GO</button>
+
 		<span style={{ margin: '10px' }}>{totalPage}</span>
 		<button
 			className="btn btn-primary btn-sm"
