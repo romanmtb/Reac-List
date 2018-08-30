@@ -16,7 +16,8 @@ const ListElementComponent = ({
 				className="btn btn-primary btn-group-sm float-right"
 				onClick={e => handler(e, idx)}
 			>
-				---
+				{open ? <span>close</span> : <span>open</span>}
+
 			</button>
 		</div>
 		<div className="card-body">
