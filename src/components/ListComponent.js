@@ -3,7 +3,7 @@ import ListElementComponent from './ListElementComponent';
 
 const ListComponent = ({ data, openHandler }) => {
 	return (
-		<ul className="list-group">
+		<div className="list-group">
 			{data.length >= 1 &&
 				data.map((item, idx) => {
 					return (
@@ -19,7 +19,7 @@ const ListComponent = ({ data, openHandler }) => {
 						/>
 					);
 				})}
-		</ul>
+		</div>
 	);
 };
 

@@ -22,6 +22,7 @@ const NavigationComponent = ({
 			style={{ width: '70px' }}
 			value={currentPage}
 			onChange={inputChangeHandler}
+
 		/>
 
 		<span style={{ margin: '10px' }}>{totalPage}</span>

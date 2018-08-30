@@ -24,13 +24,15 @@ const ListElementComponent = ({
 			<h6 className="card-subtitle text-muted">
 				{new Date(date).toLocaleString()}
 			</h6>
-			{open &&
-				body && (
+			<p>
+                {open &&
+                body && (
 					<i>
-						{`${body}...`}
+                        {`${body}...`}
 						<a href={link}>full article</a>
 					</i>
-				)}
+                )}
+			</p>
 		</div>
 	</div>
 );
