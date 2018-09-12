@@ -8,6 +8,8 @@ import LoadingComponent from './LoadingComponent';
 import { apiGetNewsBody, getNews } from '../utils';
 import 'bootstrap/dist/css/bootstrap.css';
 
+
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -26,6 +28,8 @@ class App extends Component {
 
 	componentDidMount() {
 		this.apiGetNews();
+		console.log('hello');
+
 	}
 
 	apiGetNews = (pageNumber = 1, pageSize = 10) => {
