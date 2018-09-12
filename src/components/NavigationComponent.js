@@ -24,8 +24,8 @@ const NavigationComponent = ({
 			onChange={inputChangeHandler}
 
 		/>
-
 		<button onClick={()=>setPage(currentPage)}>GO</button>
+
 
 		<span style={{ margin: '10px' }}>{totalPage}</span>
 		<button
