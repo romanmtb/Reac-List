@@ -107,7 +107,7 @@ class App extends Component {
 						<HeaderMenuComponent refreshNews={this.refreshNews} />
 					</header>
 					<div className="alert-danger">
-						<p>Sorry we couldn't find news for you. Please try again later</p>
+						<p>Sorry we couldnt find news for you. Please try again later</p>
 					</div>
 				</div>
 			);
